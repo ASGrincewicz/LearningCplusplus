@@ -6,6 +6,8 @@ using namespace std;
 const int MAX_CHIPS = 100;
 const float MAX_TURN = 0.5;
 
+string FindPlayerName(string names[], bool playerTurn);
+
 int main()
 {
     bool player1Turn = true;
@@ -36,16 +38,7 @@ int main()
         {
             do
             {
-
-                if (player1Turn)
-                {
-                    cout << playerName[0] << ", How many chips would you like?\n";
-                }
-                else
-                {
-                    cout << playerName[1] << ", How many chips would you like?\n";
-                }
-
+                cout <<FindPlayerName(playerName, player1Turn) << ", How many chips would you like?\n";
                 maxPerTurn = (MAX_TURN * chipsInPile);
                 cout << "You can only take up to ";
                 if (maxPerTurn == 0)
@@ -61,11 +54,9 @@ int main()
             if (chipsInPile == 0)
             {
                 gameOver = true;
-                if (player1Turn)
-                    cout << playerName[1] << " , wins!\n";
-                else
-                    cout << playerName[0] << " , wins!\n";
-            } else
+                cout <<FindPlayerName(playerName, player1Turn) << " , wins!\n";
+            }
+            else
                 player1Turn = !player1Turn;
         }
         cout << "Do you want to play again? (Y/N)\n";
@@ -73,4 +64,11 @@ int main()
     }
     while((userChoice == 'y') || (userChoice =='Y'));
     return 0;
+}
+string FindPlayerName(string names[], bool playerTurn)
+{
+    if(playerTurn ==true)
+        return names[0];
+    else
+        return names[1];
 }
